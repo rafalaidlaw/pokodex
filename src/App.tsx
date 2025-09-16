@@ -46,6 +46,25 @@ function App() {
     fetchPokemon();
   }, []);
 
+  const onSearchChange = (event: any) => {
+    const searchValue = event.target.value.toLowerCase();
+
+    if (searchValue === "") {
+      setPokemon(allPokemon);
+    } else {
+      const filteredPokemon = allPokemon.filter((pokemon: any) => {
+        if (searchByType) {
+          return pokemon.types.some((type: string) =>
+            type.toLowerCase().includes(searchValue)
+          );
+        } else {
+          return pokemon.name.toLowerCase().includes(searchValue);
+        }
+      });
+      setPokemon(filteredPokemon);
+    }
+  };
+
   return (
     <>
       <h2>Pokedex</h2>
@@ -54,24 +73,7 @@ function App() {
           className="search-box"
           type="search"
           placeholder={searchByType ? "Search by Type" : "Search by Name"}
-          onChange={(event) => {
-            const searchValue = event.target.value.toLowerCase();
-
-            if (searchValue === "") {
-              setPokemon(allPokemon);
-            } else {
-              const filteredPokemon = allPokemon.filter((pokemon: any) => {
-                if (searchByType) {
-                  return pokemon.types.some((type: string) =>
-                    type.toLowerCase().includes(searchValue)
-                  );
-                } else {
-                  return pokemon.name.toLowerCase().includes(searchValue);
-                }
-              });
-              setPokemon(filteredPokemon);
-            }
-          }}
+          onChange={onSearchChange}
         />
         <div className="toggle-container">
           <span className="toggle-label">Names</span>
