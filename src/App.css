@@ -173,6 +173,8 @@
   height: 120px;
   object-fit: contain;
   margin-bottom: 0.8rem;
+  cursor:pointer;
+  
 }
 
 .pokemon-card h4 {

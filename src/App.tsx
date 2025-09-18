@@ -8,6 +8,7 @@ interface Pokemon {
   image: string;
   types: string[];
 }
+// life is good for some chickens
 
 function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
